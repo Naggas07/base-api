@@ -21,10 +21,12 @@ module.exports.get = (req, res, next) => {
     Column.findById(req.params.id)
     .populate('cards')
         .then(
-            column => {if (!column) {
+            column => {
+            console.log(column)
+            if (!column) {
                 throw createError(404, 'column not found');
             } else {
-            column => res.json(column)
+            res.json(column)
             }}
         ).catch(next)
 }

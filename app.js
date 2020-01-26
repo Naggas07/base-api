@@ -1,8 +1,11 @@
+require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const cors = require('./config/cors.config');
 
 /**
  * DB config
@@ -13,6 +16,7 @@ require('./config/db.config');
  * Configure express
  */
 const app = express();
+app.use(cors);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -55,7 +59,7 @@ app.use(function (error, req, res, next) {
 /** 
  * Listen on provided port
  */
-const port = normalizePort(process.env.PORT || '3001');
+const port = normalizePort(process.env.PORT || '3000');
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
